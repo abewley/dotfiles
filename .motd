@@ -24,7 +24,7 @@ $blue+$green Hostname\t$white $(hostname)
 $blue+$green Address\t$white $ADDRESS
 $blue+$green Kernel\t$white $(uname -r)
 $blue+$green Uptime\t$white $(uptime | sed 's/.*up \([^,]*\), .*/\1/')
-$blue+$green CPU\t$white $CPUINFO
+$blue+$green CPU\t\t$white $CPUINFO
 $blue+$green Memory\t $white$MEMSIZE GB
 $blue+++++++++++++++++++++++:$green User Data $blue:+++++++++++++++++++++++++
 $blue+$green Username\t$white $(whoami)
