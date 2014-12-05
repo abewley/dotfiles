@@ -87,4 +87,4 @@ else
     start_agent;
 fi
 
-sh .motd
+bash .motd
