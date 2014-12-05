@@ -1,0 +1,31 @@
+[user]
+	name = Michael Tanner
+	email = mtanner@robots.ox.ac.uk
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+[push]
+	default = tracking
+[branch]
+	autosetuprebase = always
+[mergetool "diffmerge"]
+	cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
+	trustExitCode = false
+[merge]
+	tool = diffmerge
+[mergetool]
+	keepBackup = false
+[core]
+	excludesfile = /Users/michaeltanner/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

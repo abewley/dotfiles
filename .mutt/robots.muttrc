@@ -1,0 +1,28 @@
+################################################################################
+# Mobile Robotics Group Account Settings
+################################################################################
+
+## Receive options
+set imap_user = "mtanner"
+set folder = "imaps://imap0.robots.ox.ac.uk:993"
+set spoolfile = +INBOX
+set postponed = +Drafts
+set record = "+Sent Messages"
+
+#mailboxes =INBOX =_action =_waiting "=[Gmail]/All Mail"
+
+## Send options
+set smtp_url = "smtp://mtanner@smtp.robots.ox.ac.uk:587/"
+set realname = "Michael Tanner"
+set from = "mtanner@robots.ox.ac.uk"
+set hostname = "robots.ox.ac.uk"
+set signature = "$HOME/.mutt/sigs/oxford"
+
+# Keyboard Shortcuts
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>=Action<enter>" "Go to action"
+macro index gz "<change-folder>=Archive<enter>" "Go to archive"
+
+## Hook -- IMPORTANT!
+account-hook $folder "set imap_user=mtanner"
+
