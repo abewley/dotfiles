@@ -1,29 +1,33 @@
 #!/bin/bash
- 
-PROCCOUNT=$(ps -l | wc -l)
-PROCCOUNT=$(expr $PROCCOUNT - 4)
- 
-ENDSESSION="Unlimited"
-PRIVLAGED="Regular User"
 
-#TODO: get size for mac or linux
-MEMSIZE=$(calc -p $(sysctl hw.memsize|cut -d\  -f2) / 1024 / 1024 / 1024)
-CPUINFO=$(sysctl -a|grep machdep.cpu.brand_string|cut -d: -f2|sed -e 's/^[ \t]*//')
+if [ "$(uname)" == "Darwin" ]; then
+  # Mac OS X platform
+  ADDRESS=$(ifconfig | grep 'inet '|cut -d\  -f2|grep -v 127.0.0.1|paste -d\  -s -)
+  MEMSIZE=$(calc -p $(sysctl hw.memsize|cut -d\  -f2) / 1024 / 1024 / 1024)
+  CPUINFO=$(sysctl -a|grep machdep.cpu.brand_string|cut -d: -f2|sed -e 's/^[ \t]*//')
+  ECHO_FLAGS=""
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+  # Linux platform
+  ADDRESS=$(ifconfig|grep 'inet '|cut -d: -f2|cut -d\  -f1|grep -v 127.0.0.1|paste -d\  -s -)
+  MEMSIZE=$(echo "scale = 1;$(cat /proc/meminfo|grep MemTotal|cut -d: -f2|sed -e 's/^[ \t]*//'|cut -d\  -f1).0 / 1024.0 / 1024.0"|bc)
+  CPUINFO=$(cat /proc/cpuinfo|grep "model name"|cut -d: -f2|sed -e 's/^[ \t]*//'|head -n 1)
+  ECHO_FLAGS="-e"
+#elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+  # Windows NT platform
+fi
 
 white="\033[01;37m"
-blue="\033[01;34m" 
+blue="\033[01;34m"
 green="\033[0;32m"
- 
-echo "$(toilet --termwidth --metal --filter crop Michael Tanner)
+
+echo $ECHO_FLAGS "$(toilet --termwidth --metal --filter crop Michael Tanner)
 $blue++++++++++++++++++++++:$green System Data $blue:++++++++++++++++++++++++$white
 $blue+$green Hostname\t$white $(hostname)
-$blue+$green Address\t$white $(ifconfig | grep 'inet '|cut -d\  -f2|grep -v 127.0.0.1|paste -d\  -s -)
+$blue+$green Address\t$white $ADDRESS
 $blue+$green Kernel\t$white $(uname -r)
 $blue+$green Uptime\t$white $(uptime | sed 's/.*up \([^,]*\), .*/\1/')
-$blue+$green CPU ($(uname -m))\t$white $CPUINFO
-$blue+$white \t\t  ($(top -l 1|head -n 10|grep CPU|cut -d: -f2|sed -e 's/^[ \t]*//'))
+$blue+$green CPU\t$white $CPUINFO
 $blue+$green Memory\t $white$MEMSIZE GB
-$blue+$white \t\t  ($(top -l 1|head -n 10|grep PhysMem|cut -d: -f2|sed -e 's/^[ \t]*//'))
 $blue+++++++++++++++++++++++:$green User Data $blue:+++++++++++++++++++++++++
 $blue+$green Username\t$white $(whoami)
 $blue+$green Shell\t\t$white $SHELL
