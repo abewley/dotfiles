@@ -18,7 +18,7 @@ white="\033[01;37m"
 blue="\033[01;34m"
 green="\033[0;32m"
 
-echo -e $ECHO_FLAGS "$(toilet --termwidth --metal --filter crop Michael Tanner)
+echo -e $ECHO_FLAGS "$(toilet --termwidth --metal --filter crop $(hostname))
 $blue++++++++++++++++++++++:$green System Data $blue:++++++++++++++++++++++++$white
 $blue+$green Hostname\t$white $(hostname)
 $blue+$green Address\t$white $ADDRESS
