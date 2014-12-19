@@ -58,6 +58,8 @@ alias tl="tmux ls"
 alias tms="tmuxinator start"
 alias tmn="tmuxinator new"
 
+alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
+
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
@@ -87,4 +89,4 @@ else
     start_agent;
 fi
 
-bash .motd
+bash ~/.motd
