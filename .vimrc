@@ -38,6 +38,8 @@ let g:solarized_termcolors = 256
 let g:solarized_contrast   = "high"
 let g:solarized_visibility = "high"
 
+NeoBundle 'chriskempson/vim-tomorrow-theme'
+
 " Better syntax highlighting for C++
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_experimental_template_highlight = 1
@@ -177,8 +179,8 @@ let g:syntastic_check_on_wq              = 0
 " NeoBundle cleanup
 call neobundle#end()
 
-" Required:
-filetype plugin indent on
+" NeoBundle Required:
+filetype plugin indent on " Automatic indention for files
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
@@ -212,10 +214,10 @@ set expandtab     " Convert tabs to spaces
 set list " Display white space
 
 " Color options
-colorscheme solarized
-highlight ColorColumn ctermbg=darkgray " color for the column line
+colorscheme Tomorrow-Night-Bright
 syntax on " Syntax highlighting
 set background=dark " dark or light
+highlight ColorColumn ctermbg=darkgray " color for the column line
 
 " Configuration load options
 set exrc " Allow a custom .vimrc to be loaded from any directory
@@ -278,6 +280,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Y should yank to the end of the line
+map Y y$
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" File type configuration
