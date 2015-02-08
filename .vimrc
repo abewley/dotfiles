@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" NeoBundle configuration
+"" NeoBundle plugin configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Install NeoBundle with the following command:
 "   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
@@ -32,16 +32,16 @@ NeoBundle 'skroll/vim-taghighlight'
 
 " Color Schemes
 NeoBundle 'altercation/vim-colors-solarized'
-let g:solarized_italic=0
-let g:solarized_underline=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
+let g:solarized_italic     = 0
+let g:solarized_underline  = 1
+let g:solarized_termcolors = 256
+let g:solarized_contrast   = "high"
+let g:solarized_visibility = "high"
 
 " Better syntax highlighting for C++
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_experimental_template_highlight = 1
-let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight           = 1
 
 " Color parentheses differently to make matching easier
 NeoBundle 'oblitum/rainbow'
@@ -52,10 +52,10 @@ NeoBundle 'tpope/vim-sensible'
 
 " Much better statusline
 NeoBundle 'bling/vim-airline'
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled    = 1
 let g:airline#extensions#whitespace#enabled = 1
-let g:airline_detect_whitespace = 1
-let g:airline_powerline_fonts=1
+let g:airline_detect_whitespace             = 1
+let g:airline_powerline_fonts               = 1
 
 " Tmux plugins (airline integration and quick command window)
 NeoBundle 'edkolev/tmuxline.vim'
@@ -86,7 +86,7 @@ nmap <Leader>t :TagbarToggle<CR>
 " Lots of useful Git interface commands (e.g., :Gst)
 NeoBundle 'fugitive.vim'
 
-" Displays "+" "-" in the margin of files f/changes since last git commit
+" Displays +, -, or ~ in the margin of files f/changes since last git commit
 NeoBundle 'airblade/vim-gitgutter'
 
 " add the 'ys' command (e.g., ysiw' will surround the current word w/')
@@ -111,8 +111,8 @@ NeoBundle 'gaving/vim-textobj-argument'
 NeoBundle 'Raimondi/delimitMate'
 imap <c-d> <Plug>delimitMateS-Tab
 let g:delimitMate_expand_space = 1
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_autoclose = 1
+let g:delimitMate_expand_cr    = 1
+let g:delimitMate_autoclose    = 1
 
 " fuzzy search
 NeoBundle 'ctrlp.vim'
@@ -123,8 +123,8 @@ nmap <Leader>be :CtrlPBuffer<CR>
 " <leader>l|h motions: intra-line motions
 " s - quick search in either direction (2 chars)
 NeoBundle 'Lokaltog/vim-easymotion'
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1 " Turn on case sensitive feature
+let g:EasyMotion_do_mapping  = 0 " Disable default mappings
+let g:EasyMotion_smartcase   = 1 " Turn on case sensitive feature
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
@@ -146,17 +146,16 @@ NeoBundle 'tpope/vim-repeat'
 
 " Awesome autocompletion (below makes ycm compatable w/ultisnips and supertab)
 NeoBundle 'Valloric/YouCompleteMe'
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_confirm_extra_conf = 0
-nmap <leader>gd :YcmCompleter GoToDeclaration<cr>
-nmap <leader>gi :YcmCompleter GoToDefinition<cr>
+let g:ycm_confirm_extra_conf           = 0
+nmap <leader>gd :YcmCompleter GoTo<cr>
 
 " Autocompletion templates (compatable w/ycm and supertab)
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'darkwind-mt/vim-snippets'
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
@@ -170,10 +169,10 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 "   2) Plugin 'Syntastic'
 NeoBundle 'Syntastic'
 NeoBundle 'petRUShka/vim-opencl.git'
-let g:syntastic_cl_checkers = ['vim-opencl']
+let g:syntastic_cl_checkers              = ['vim-opencl']
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
 
 " NeoBundle cleanup
 call neobundle#end()
@@ -196,7 +195,7 @@ set nospell spelllang=en_gb " spell check *off* by default
 " Fold options
 set foldmethod=syntax
 set foldcolumn=0 " show helper lines on left side
-set foldlevelstart=0 " Start with everything folded
+au BufRead * normal zR
 
 " End-of-line options
 set linebreak " do reasonable wrapping (e.g., on word boundaries)
@@ -261,13 +260,13 @@ map <Leader>vrc :e ~/dotfiles/$MYVIMRC<CR>
 map <Leader>crc :!~/dotfiles/bootstrap.sh<CR>
 
 " Get rid of the arrow keys to learn better Vim habits
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
+map  <up>    <nop>
+map  <down>  <nop>
+map  <left>  <nop>
+map  <right> <nop>
+imap <up>    <nop>
+imap <down>  <nop>
+imap <left>  <nop>
 imap <right> <nop>
 
 " Intuitive movement even with soft line wraps
@@ -283,6 +282,7 @@ nnoremap <C-H> <C-W><C-H>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" File type configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufNewFile,BufRead *.cu,*.cuh set ft=cuda.cpp.doxygen
+au BufNewFile,BufRead *.cu,*.cuh       set ft=cuda.cpp.doxygen
 au BufNewFile,BufRead *.cpp,*.hpp,*.cc set ft=cpp.doxygen
+au BufNewFile,BufRead *.c,*.h          set ft=c.doxygen
 
