@@ -4,7 +4,7 @@
 " Install NeoBundle with the following command:
 "   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 
- " Note: Skip initialization for vim-tiny or vim-small.
+" Note: Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
 
 if has('vim_starting')
@@ -12,33 +12,25 @@ if has('vim_starting')
     set nocompatible               " Be iMproved
   endif
 
-  " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-" Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
-" Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
 
 " Better highlighting of language tags
 NeoBundle 'skroll/vim-taghighlight'
 
 " Color Schemes
+NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'altercation/vim-colors-solarized'
 let g:solarized_italic     = 0
 let g:solarized_underline  = 1
 let g:solarized_termcolors = 256
 let g:solarized_contrast   = "high"
 let g:solarized_visibility = "high"
-
-NeoBundle 'chriskempson/vim-tomorrow-theme'
 
 " Better syntax highlighting for C++
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
@@ -143,7 +135,7 @@ NeoBundle 'vim-scripts/ZoomWin'
 " Special handler of '.otl' files for to-do lists, outlines, etc.
 NeoBundle 'vimoutliner/vimoutliner.git'
 
-" allows '.' to repeat commands for a varity of plugins (e.g. surround.vim)
+" Allows '.' to repeat commands for a varity of plugins (e.g. surround.vim)
 NeoBundle 'tpope/vim-repeat'
 
 " Awesome autocompletion (below makes ycm compatable w/ultisnips and supertab)
@@ -159,7 +151,6 @@ NeoBundle 'darkwind-mt/vim-snippets'
 let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
 
 " Allow multiple programs to use <tab> for autocompletion
 NeoBundle 'ervandew/supertab'
