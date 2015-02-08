@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="clean"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -21,7 +21,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X10/bin:/usr/texbin"
 export PATH="$HOME/bin:$PATH"
-export PATH="/Developer/NVIDIA/CUDA-6.5/bin:$PATH"
+export PATH="/Developer/NVIDIA/CUDA-7.0/bin:$PATH"
 export LAPS_BIN="$HOME/code/laps/build/bin/"
 
 # You may need to manually set your language environment
@@ -62,6 +62,9 @@ alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
+
+export OPENNI2_INCLUDE=/usr/local/include/ni2
+export OPENNI2_REDIST=/usr/local/lib/ni2
 
 # Plugin for Tmux
 source ~/.bin/tmuxinator.zsh
