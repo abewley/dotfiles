@@ -50,14 +50,17 @@ let g:airline#extensions#tabline#enabled    = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline_detect_whitespace             = 1
 let g:airline_powerline_fonts               = 1
+let g:airline#extensions#tabline#fnamemod = ':t' " Only display buffer filename
 
-" Tmux plugins (airline integration and quick command window)
+" Tmux plugins (airline integration & quick command window)
 NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'benmills/vimux'
+let VimuxUseNearest = 0
 
 " Pandoc support
 NeoBundle 'vim-pandoc/vim-pandoc'
 NeoBundle 'vim-pandoc/vim-pandoc-syntax'
+let g:pandoc#command#autoexec_command = "Pandoc! pdf --filter pandoc-zotxt --csl=ieee.csl --filter pandoc-citeproc"
 
 " File system browser
 NeoBundle 'The-NERD-tree'
@@ -82,6 +85,20 @@ NeoBundle 'fugitive.vim'
 
 " Displays +, -, or ~ in the margin of files f/changes since last git commit
 NeoBundle 'airblade/vim-gitgutter'
+
+" Better search utility
+NeoBundle 'haya14busa/incsearch.vim'
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
 " add the 'ys' command (e.g., ysiw' will surround the current word w/')
 " or change type (e.g., cs"' changes double to single quotes)
@@ -110,7 +127,10 @@ let g:delimitMate_autoclose    = 1
 
 " fuzzy search
 NeoBundle 'ctrlp.vim'
-nmap <Leader>be :CtrlPBuffer<CR>
+
+" Buffer explorer
+NeoBundle 'fholgado/minibufexpl.vim'
+nmap <Leader>be :MBEToggle<CR>
 
 " Easily jump around buffer -> see below configuration for key bindings
 " <leader>j|K motions: line motions
@@ -278,7 +298,8 @@ map Y y$
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" File type configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufNewFile,BufRead *.cu,*.cuh       set ft=cuda.cpp.doxygen
-au BufNewFile,BufRead *.cpp,*.hpp,*.cc set ft=cpp.doxygen
-au BufNewFile,BufRead *.c,*.h          set ft=c.doxygen
+autocmd BufNewFile,BufRead *.cu,*.cuh       set ft=cuda.cpp.doxygen
+autocmd BufNewFile,BufRead *.cpp,*.hpp,*.cc set ft=cpp.doxygen
+autocmd BufNewFile,BufRead *.c,*.h          set ft=c.doxygen
+autocmd BufNewFile,BufRead *.md             set ft=markdown
 
