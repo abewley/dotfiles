@@ -37,6 +37,10 @@ NeoBundle 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight           = 1
 
+" Quick switching between C/C++ header/implemntation
+NeoBundle 'derekwyatt/vim-fswitch'
+map <Leader>of :FSHere<CR>
+
 " Color parentheses differently to make matching easier
 NeoBundle 'oblitum/rainbow'
 let g:rainbow_active = 1 " Turn on rainbow parentheses for all file types
@@ -52,19 +56,28 @@ let g:airline_detect_whitespace             = 1
 let g:airline_powerline_fonts               = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " Only display buffer filename
 
+" Better session memory
+NeoBundle 'tpope/vim-obsession'
+
 " Tmux plugins (airline integration & quick command window)
 NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'benmills/vimux'
-let VimuxUseNearest = 0
+let VimuxUseNearest = 1
 
 " Pandoc support
 NeoBundle 'vim-pandoc/vim-pandoc'
 NeoBundle 'vim-pandoc/vim-pandoc-syntax'
-let g:pandoc#command#autoexec_command = "Pandoc! pdf --filter pandoc-zotxt --csl=ieee.csl --filter pandoc-citeproc"
+let g:pandoc#command#autoexec_on_writes = 1
+"let g:pandoc#command#autoexec_command = "Pandoc! pdf --filter pandoc-zotxt --csl=ieee.csl --filter pandoc-citeproc"
+
+" Latex support
+NeoBundle 'lervag/vim-latex'
 
 " File system browser
-NeoBundle 'The-NERD-tree'
-map <Leader>fe :NERDTreeToggle<CR>
+NeoBundle 'scrooloose/nerdtree'
+let NERDTreeShowLineNumbers = 1
+let NERDTreeMinimalUI = 1
+map <Leader>e :e .<CR>
 
 " Align comments and other code snippets
 " <leader>acom - align comments
@@ -127,10 +140,7 @@ let g:delimitMate_autoclose    = 1
 
 " fuzzy search
 NeoBundle 'ctrlp.vim'
-
-" Buffer explorer
-NeoBundle 'fholgado/minibufexpl.vim'
-nmap <Leader>be :MBEToggle<CR>
+nmap <leader>be :CtrlPBuffer<cr>
 
 " Easily jump around buffer -> see below configuration for key bindings
 " <leader>j|K motions: line motions
@@ -163,7 +173,8 @@ NeoBundle 'Valloric/YouCompleteMe'
 let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_confirm_extra_conf           = 0
-nmap <leader>gd :YcmCompleter GoTo<cr>
+nmap <leader>gh :YcmCompleter GoToDeclaration<cr>
+nmap <leader>gi :YcmCompleter GoToDefinition<cr>
 
 " Autocompletion templates (compatable w/ycm and supertab)
 NeoBundle 'SirVer/ultisnips'
@@ -257,7 +268,7 @@ if has("gui_win32")
 elseif has("gui_gtk2")
     set guifont=Ubuntu\ Mono\ 10
 elseif has("gui_macvim")
-    set guifont=Ubuntu\ Mono:h14
+    set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
 endif
 
 if has("gui_running")
@@ -269,8 +280,10 @@ endif
 "" Misc Key Maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vimrc edit and load
-map <Leader>vrc :e ~/dotfiles/$MYVIMRC<CR>
-map <Leader>crc :!~/dotfiles/bootstrap.sh<CR>
+map <leader>vrc :e $HOME/dotfiles/.vimrc<cr>
+map <leader>crc :! $HOME/dotfiles/bootstrap.sh<cr>
+map <leader>w :w<cr>
+map <leader>q :qa<cr>
 
 " Get rid of the arrow keys to learn better Vim habits
 map  <up>    <nop>
@@ -298,8 +311,16 @@ map Y y$
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" File type configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufNewFile,BufRead *.cu,*.cuh       set ft=cuda.cpp.doxygen
-autocmd BufNewFile,BufRead *.cpp,*.hpp,*.cc set ft=cpp.doxygen
-autocmd BufNewFile,BufRead *.c,*.h          set ft=c.doxygen
-autocmd BufNewFile,BufRead *.md             set ft=markdown
+autocmd BufNewFile,BufRead *.cu,*.cuh       set filetype=cuda.cpp.c.doxygen
+autocmd BufNewFile,BufRead *.cpp,*.hpp,*.cc set filetype=cpp.c.doxygen
+autocmd BufNewFile,BufRead *.c,*.h          set filetype=c.doxygen
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Latex File Specialization
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufNewFile,BufRead *.tex            set textwidth=0
+autocmd FileType tex                        nested :TagbarOpen
+map <leader>lm :VimuxRunCommand("latexmk -pdf " . expand("%"))<CR>
+map <leader>lc :VimuxRunCommand("latexmk -C")<CR>
+map <leader>lv :VimuxRunCommand("open " . expand("%:r") . ".pdf")<CR>
 
