@@ -48,6 +48,7 @@ alias lla="ls -GFhla"
 alias bi="brew install"
 
 alias gd="git diff --word-diff"
+alias gm="git merge --no-ff"
 alias gcd="git checkout develop"
 alias gg="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
@@ -59,6 +60,10 @@ alias tms="tmuxinator start"
 alias tmn="tmuxinator new"
 
 alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
+
+rmswp() {
+  rm -i $(find . | grep .swp$)
+}
 
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
