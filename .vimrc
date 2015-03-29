@@ -40,6 +40,10 @@ let g:cpp_class_scope_highlight           = 1
 " Quick switching between C/C++ header/implemntation
 NeoBundle 'derekwyatt/vim-fswitch'
 map <Leader>of :FSHere<CR>
+au BufEnter *.h,*.hpp,*.hh,*.cuh let b:fswitchdst  = 'cpp,cc,cu'
+au BufEnter *.h,*.hpp,*.hh,*.cuh let b:fswitchlocs = 'reg:/include.*/src/'
+au BufEnter *.cpp,*.cc,*.cu let b:fswitchdst  = 'h,hpp,hh,cuh'
+au BufEnter *.cpp,*.cc,*.cu let b:fswitchlocs = 'reg:|src|include/**'
 
 " Color parentheses differently to make matching easier
 NeoBundle 'oblitum/rainbow'
@@ -98,7 +102,6 @@ NeoBundle 'fugitive.vim'
 
 " Displays +, -, or ~ in the margin of files f/changes since last git commit
 NeoBundle 'airblade/vim-gitgutter'
-
 " Better search utility
 NeoBundle 'haya14busa/incsearch.vim'
 set hlsearch
@@ -279,9 +282,16 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Misc Key Maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+  " W/o this, nvim doesn't allow a <c-h> binding
+  nmap <bs> <c-w>h
+  tnoremap <esc> <c-\><c-n>
+  map <leader>crc :terminal $HOME/dotfiles/bootstrap.sh<cr>
+else
+  map <leader>crc :! $HOME/dotfiles/bootstrap.sh<cr>
+endif
 " Vimrc edit and load
 map <leader>vrc :e $HOME/dotfiles/.vimrc<cr>
-map <leader>crc :! $HOME/dotfiles/bootstrap.sh<cr>
 map <leader>w :w<cr>
 map <leader>q :qa<cr>
 
