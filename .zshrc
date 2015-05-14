@@ -23,6 +23,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X10/bin:/usr/texb
 export PATH="$HOME/bin:$PATH"
 export PATH="/Developer/NVIDIA/CUDA-7.0/bin:$PATH"
 export LAPS_BIN="$HOME/code/laps/build/bin/"
+export LD_LIBRARY_PATH="$HOME/work/borg/build/lib/"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
