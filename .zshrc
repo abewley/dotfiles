@@ -61,8 +61,15 @@ alias tmn="tmuxinator new"
 
 alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 
+# Remove swap files below this directory (confirms before deleting each file)
 rmswp() {
   rm -i $(find . | grep .swp$)
+}
+
+# mkdir, cd into it
+mkcd () {
+  mkdir -p "$*"
+  cd "$*"
 }
 
 export CC=/usr/bin/clang
