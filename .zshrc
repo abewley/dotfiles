@@ -73,8 +73,17 @@ mkcd () {
   cd "$*"
 }
 
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
+if [ "$(uname)" == "Darwin" ]; then
+  # Mac
+  export CC=/usr/bin/clang
+  export CXX=/usr/bin/clang++
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+  # Linux
+  export CC=/usr/bin/gcc
+  export CXX=/usr/bin/g++
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+  # Windows
+fi
 
 export OPENNI2_INCLUDE=/usr/local/include/ni2
 export OPENNI2_REDIST=/usr/local/lib/ni2
