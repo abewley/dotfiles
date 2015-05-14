@@ -73,15 +73,15 @@ mkcd () {
   cd "$*"
 }
 
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
   # Mac
   export CC=/usr/bin/clang
   export CXX=/usr/bin/clang++
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   # Linux
   export CC=/usr/bin/gcc
   export CXX=/usr/bin/g++
-elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
   # Windows
 fi
 
