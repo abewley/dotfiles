@@ -56,7 +56,7 @@ NeoBundle 'tpope/vim-sensible'
 NeoBundle 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled    = 1
 let g:airline#extensions#whitespace#enabled = 1
-let g:airline_detect_whitespace             = 1
+let g:airline#extensions#whitespace#show_message = 1
 let g:airline_powerline_fonts               = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " Only display buffer filename
 
