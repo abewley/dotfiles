@@ -115,3 +115,4 @@ else
 fi
 
 bash ~/.motd
+source ~/env.vars
