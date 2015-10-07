@@ -52,6 +52,7 @@ alias gd="git diff --word-diff"
 alias gm="git merge --no-ff"
 alias gcd="git checkout develop"
 alias gg="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+git config --global core.excludesfile '~/.gitignore'
 
 alias m="make"
 alias mt="make && make test"
@@ -65,6 +66,21 @@ alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 # Remove swap files below this directory (confirms before deleting each file)
 rmswp() {
   rm -i $(find . | grep .swp$)
+}
+
+# Compress a PDF file (requires ghostscript)
+# https://blog.omgmog.net/post/compressing-pdf-from-your-mac-or-linux-terminal-with-ghostscript/
+# Usage: compresspdf [pdf file]
+# alternaitve types: [screen*|ebook|printer|prepress]
+compress_pdf() {
+  for in_file in "$@"
+  do
+    echo "Compressing ${in_file}..."
+    BAK_FILE=${in_file}.bak.compress_pdf
+    cp ${in_file} ${BAK_FILE}
+    gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dPDFSETTINGS=/"prepress" -dCompatibilityLevel=1.4 -sOutputFile=${in_file} $BAK_FILE
+    rm $BAK_FILE
+  done
 }
 
 # mkdir, cd into it
@@ -115,4 +131,4 @@ else
 fi
 
 bash ~/.motd
-source ~/env.vars
+source ~/.env.vars

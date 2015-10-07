@@ -1,1 +1,6 @@
+.DS_Store
 *.pyo
+*.swp
+*.swo
+*~
+CMakeLists.txt.user

@@ -32,6 +32,9 @@ let g:solarized_termcolors = 256
 let g:solarized_contrast   = "high"
 let g:solarized_visibility = "high"
 
+" Python support
+NeoBundle 'klen/python-mode'
+
 " Better syntax highlighting for C++
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_experimental_template_highlight = 1
@@ -225,8 +228,9 @@ set foldcolumn=0 " show helper lines on left side
 au BufRead * normal zR
 
 " End-of-line options
-set linebreak " do reasonable wrapping (e.g., on word boundaries)
 set wrap " display wrapped lines (soft wrap)
+set linebreak " do reasonable wrapping (e.g., on word boundaries)
+set nolist " ensures wrapping is done on word boundaries
 set textwidth=80 " hard wrap at this character ('0' for no hard wrapping)
 set colorcolumn=81 " Show 1-character-wide, vertical line at this column
 
@@ -236,13 +240,15 @@ set tabstop=8     " Actual tab character takes take x spaces
 set shiftwidth=2  " Width of automatic indents
 set softtabstop=2 " Make the tab indent by x spaces
 set expandtab     " Convert tabs to spaces
-set list " Display white space
+"set list " Display white space
 
 " Color options
 colorscheme Tomorrow-Night-Bright
 syntax on " Syntax highlighting
 set background=dark " dark or light
-highlight ColorColumn ctermbg=darkgray " color for the column line
+highlight ColorColumn ctermbg=LightBlue " color for the column line
+highlight cursorline ctermbg=LightBlue
+set cursorline
 
 " Configuration load options
 set exrc " Allow a custom .vimrc to be loaded from any directory
@@ -330,7 +336,7 @@ autocmd BufNewFile,BufRead *.c,*.h          set filetype=c.doxygen
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufNewFile,BufRead *.tex            set textwidth=0
 autocmd FileType tex                        nested :TagbarOpen
-map <leader>lm :VimuxRunCommand("latexmk -pdf " . expand("%"))<CR>
+map <leader>lm :VimuxRunCommand("latexmk -pdf -synctex=1 " . expand("%"))<CR>
 map <leader>lc :VimuxRunCommand("latexmk -C")<CR>
-map <leader>lv :VimuxRunCommand("open " . expand("%:r") . ".pdf")<CR>
+map <leader>lx <leader>lm:VimuxRunCommand("displayline -r -b -g ". line(".") . " " . expand("%:r") . ".pdf")<CR>
 
