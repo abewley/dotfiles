@@ -21,7 +21,6 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X10/bin:/usr/texbin"
 export PATH="$HOME/bin:$PATH"
-export PATH="/Developer/NVIDIA/CUDA-7.5/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/work/borg/build/lib/"
 
 # You may need to manually set your language environment
@@ -88,14 +87,18 @@ mkcd () {
   cd "$*"
 }
 
+# OS Specific commands
 if [ "$(uname)" = "Darwin" ]; then
   # Mac
   export CC=/usr/bin/clang
   export CXX=/usr/bin/clang++
+  export PATH="/Developer/NVIDIA/CUDA-7.5/bin:$PATH"
+  . /Users/michaeltanner/opt/torch/install/bin/torch-activate
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   # Linux
   export CC=/usr/bin/gcc
   export CXX=/usr/bin/g++
+  export CUDA_VISIBLE_DEVICES=1
 elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
   # Windows
 fi
@@ -131,5 +134,3 @@ fi
 
 bash ~/.motd
 source ~/.env.vars
-
-. /Users/michaeltanner/opt/torch/install/bin/torch-activate
