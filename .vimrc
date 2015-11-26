@@ -40,6 +40,15 @@ NeoBundle 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight           = 1
 
+" C++ formatter
+NeoBundle 'kana/vim-operator-user'
+NeoBundle 'rhysd/vim-clang-format'
+autocmd FileType h,hpp,c,cpp,cu nnoremap <Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType h,hpp,c,cpp,cu vnoremap <Leader>cf :ClangFormat<CR>
+autocmd FileType h,hpp,c,cpp,cu map <Leader>x <Plug>(operator-clang-format)
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+let g:clang_format#code_style = "google"
+
 " Quick switching between C/C++ header/implemntation
 NeoBundle 'derekwyatt/vim-fswitch'
 map <Leader>of :FSHere<CR>

@@ -21,8 +21,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X10/bin:/usr/texbin"
 export PATH="$HOME/bin:$PATH"
-export PATH="/Developer/NVIDIA/CUDA-7.0/bin:$PATH"
-export LAPS_BIN="$HOME/code/laps/build/bin/"
+export PATH="/Developer/NVIDIA/CUDA-7.5/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/work/borg/build/lib/"
 
 # You may need to manually set your language environment
@@ -132,3 +131,5 @@ fi
 
 bash ~/.motd
 source ~/.env.vars
+
+. /Users/michaeltanner/opt/torch/install/bin/torch-activate

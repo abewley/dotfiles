@@ -1,0 +1,20 @@
+" Beginning-of-line options
+set relativenumber " show relative line numbers
+
+" Simplifiers
+map <leader>w :w<cr>
+map <leader>q :qa<cr>
+map <leader>e :e .<cr>
+
+" Get rid of the arrow keys to learn better Vim habits
+map  <up>    <nop>
+map  <down>  <nop>
+map  <left>  <nop>
+map  <right> <nop>
+imap <up>    <nop>
+imap <down>  <nop>
+imap <left>  <nop>
+imap <right> <nop>
+
+" Y should yank to the end of the line
+map Y y$
