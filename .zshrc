@@ -23,6 +23,9 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X10/bin:/usr/texb
 export PATH="$HOME/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/work/borg/build/lib/"
 
+export GLOG_logtostderr=1
+export GLOG_colorlogtostderr=1
+
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
@@ -56,6 +59,8 @@ alias m="make"
 alias mt="make && make test"
 alias ta="tmux a"
 alias tl="tmux ls"
+alias tn=" tmux new -s"
+alias ta="tmux attach -t"
 alias tms="tmuxinator start"
 alias tmn="tmuxinator new"
 
