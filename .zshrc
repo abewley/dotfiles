@@ -103,7 +103,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   # Linux
   export CC=/usr/bin/gcc
   export CXX=/usr/bin/g++
-  export CUDA_VISIBLE_DEVICES=1
+  export CUDA_VISIBLE_DEVICES=0
 elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
   # Windows
 fi
