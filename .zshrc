@@ -104,6 +104,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   export CC=/usr/bin/gcc
   export CXX=/usr/bin/g++
   export CUDA_VISIBLE_DEVICES=0
+  eval `keychain --agents ssh --eval id_rsa`
 elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
   # Windows
 fi
