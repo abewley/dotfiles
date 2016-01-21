@@ -92,23 +92,6 @@ mkcd () {
   cd "$*"
 }
 
-# OS Specific commands
-if [ "$(uname)" = "Darwin" ]; then
-  # Mac
-  export CC=/usr/bin/clang
-  export CXX=/usr/bin/clang++
-  export PATH="/Developer/NVIDIA/CUDA-7.5/bin:$PATH"
-  . /Users/michaeltanner/opt/torch/install/bin/torch-activate
-elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-  # Linux
-  export CC=/usr/bin/gcc
-  export CXX=/usr/bin/g++
-  export CUDA_VISIBLE_DEVICES=0
-  eval `keychain --agents ssh --eval id_rsa`
-elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
-  # Windows
-fi
-
 export OPENNI2_INCLUDE=/usr/local/include/ni2
 export OPENNI2_REDIST=/usr/local/lib/ni2
 
@@ -140,3 +123,20 @@ fi
 
 bash ~/.motd
 source ~/.env.vars
+
+# OS Specific commands
+if [ "$(uname)" = "Darwin" ]; then
+  # Mac
+  export CC=/usr/bin/clang
+  export CXX=/usr/bin/clang++
+  export PATH="/Developer/NVIDIA/CUDA-7.5/bin:$PATH"
+  . /Users/michaeltanner/opt/torch/install/bin/torch-activate
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+  # Linux
+  export CC=/usr/bin/gcc
+  export CXX=/usr/bin/g++
+  export CUDA_VISIBLE_DEVICES=0
+  eval `keychain --agents ssh --eval id_rsa`
+elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
+  # Windows
+fi
