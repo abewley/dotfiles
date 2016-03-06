@@ -130,7 +130,6 @@ if [ "$(uname)" = "Darwin" ]; then
   export CC=/usr/bin/clang
   export CXX=/usr/bin/clang++
   export PATH="/Developer/NVIDIA/CUDA-7.5/bin:$PATH"
-  . /Users/michaeltanner/opt/torch/install/bin/torch-activate
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   # Linux
   export CC=/usr/bin/gcc
