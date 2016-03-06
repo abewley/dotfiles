@@ -1,31 +1,33 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" NeoBundle plugin configuration
+"" Plugin Configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Install NeoBundle with the following command:
-"   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+" Install vim-plub with the following command:
+"   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" Options after each 'Plug' command:
+"| Option                  | Description                                      |
+"| ----------------------- | ------------------------------------------------ |
+"| `branch`/`tag`/`commit` | Branch/tag/commit of the repository to use       |
+"| `rtp`                   | Subdirectory that contains Vim plugin            |
+"| `dir`                   | Custom directory for the plugin                  |
+"| `as`                    | Use different name for the plugin                |
+"| `do`                    | Post-update hook (string or funcref)             |
+"| `on`                    | On-demand loading: Commands or `<Plug>`-mappings |
+"| `for`                   | On-demand loading: File types                    |
+"| `frozen`                | Do not update unless explicitly specified        |
+"
 
-" Note: Skip initialization for vim-tiny or vim-small.
-if !1 | finish | endif
-
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+if &compatible
+  set nocompatible
 endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " Better highlighting of language tags
-NeoBundle 'skroll/vim-taghighlight'
+Plug 'skroll/vim-taghighlight'
 
 " Color Schemes
-NeoBundle 'chriskempson/vim-tomorrow-theme'
-NeoBundle 'altercation/vim-colors-solarized'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'altercation/vim-colors-solarized'
 let g:solarized_italic     = 0
 let g:solarized_underline  = 1
 let g:solarized_termcolors = 256
@@ -33,22 +35,22 @@ let g:solarized_contrast   = "high"
 let g:solarized_visibility = "high"
 
 " Python support
-NeoBundle 'klen/python-mode'
+Plug 'klen/python-mode'
 
 " Better syntax highlighting for C++
-NeoBundle 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight           = 1
 
 " Build System
-NeoBundle 'benekastah/neomake'
+Plug 'benekastah/neomake'
 " open errors/warnings after building, but don't move cursor into quickfix
 let g:neomake_open_list = 2
 nmap <leader>mv :Neomake!<cr>
 
 " C++ formatter
-NeoBundle 'kana/vim-operator-user'
-NeoBundle 'rhysd/vim-clang-format'
+Plug 'kana/vim-operator-user'
+Plug 'rhysd/vim-clang-format'
 autocmd FileType h,hpp,c,cpp,cu nnoremap <Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType h,hpp,c,cpp,cu vnoremap <Leader>cf :ClangFormat<CR>
 autocmd FileType h,hpp,c,cpp,cu map <Leader>x <Plug>(operator-clang-format)
@@ -56,7 +58,7 @@ nmap <Leader>C :ClangFormatAutoToggle<CR>
 let g:clang_format#code_style = "google"
 
 " Quick switching between C/C++ header/implemntation
-NeoBundle 'derekwyatt/vim-fswitch'
+Plug 'derekwyatt/vim-fswitch'
 map <Leader>of :FSHere<CR>
 au BufEnter *.h,*.hpp,*.hh,*.cuh let b:fswitchdst  = 'cpp,cc,cu'
 au BufEnter *.h,*.hpp,*.hh,*.cuh let b:fswitchlocs = 'reg:/include.*/src/'
@@ -65,14 +67,14 @@ au BufEnter *.cpp,*.cc,*.cu let b:fswitchdst  = 'h,hpp,hh,cuh'
 au BufEnter *.cpp,*.cc,*.cu let b:fswitchlocs = 'reg:|src\(.*src\)\@!|include/**'
 
 " Color parentheses differently to make matching easier
-NeoBundle 'oblitum/rainbow'
+Plug 'oblitum/rainbow'
 let g:rainbow_active = 1 " Turn on rainbow parentheses for all file types
 
 " Commonly-accept default vim conifuration
-NeoBundle 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'
 
 " Much better statusline
-NeoBundle 'bling/vim-airline'
+Plug 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled    = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#show_message = 1
@@ -80,24 +82,24 @@ let g:airline_powerline_fonts               = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " Only display buffer filename
 
 " Better session memory
-NeoBundle 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'
 
 " Tmux plugins (airline integration & quick command window)
-NeoBundle 'edkolev/tmuxline.vim'
-NeoBundle 'benmills/vimux'
+Plug 'edkolev/tmuxline.vim'
+Plug 'benmills/vimux'
 let VimuxUseNearest = 1
 
 " Pandoc support
-NeoBundle 'vim-pandoc/vim-pandoc'
-NeoBundle 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 let g:pandoc#command#autoexec_on_writes = 1
 "let g:pandoc#command#autoexec_command = "Pandoc! pdf --filter pandoc-zotxt --csl=ieee.csl --filter pandoc-citeproc"
 
 " Latex support
-NeoBundle 'lervag/vim-latex'
+Plug 'lervag/vim-latex'
 
 " File system browser
-NeoBundle 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 let NERDTreeShowLineNumbers = 1
 let NERDTreeMinimalUI = 1
 map <Leader>e :e .<CR>
@@ -109,20 +111,20 @@ map <Leader>e :e .<CR>
 " <leader>tsp - align on whitespace
 " <leader>t= - align on '='
 " <leader>t, - align on ','
-NeoBundle 'Align'
+Plug 'Align'
 
 " Display ctags in a buffer
-NeoBundle 'darkwind-mt/vim-tagbar'
+Plug 'darkwind-mt/vim-tagbar'
 let g:tagbar_show_linenumbers = 1 " Show line numbers in the tagbar
 nmap <Leader>t :TagbarToggle<CR>
 
 " Lots of useful Git interface commands (e.g., :Gst)
-NeoBundle 'fugitive.vim'
+Plug 'fugitive.vim'
 
 " Displays +, -, or ~ in the margin of files f/changes since last git commit
-NeoBundle 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " Better search utility
-NeoBundle 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch.vim'
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map /  <Plug>(incsearch-forward)
@@ -137,38 +139,38 @@ map g# <Plug>(incsearch-nohl-g#)
 
 " add the 'ys' command (e.g., ysiw' will surround the current word w/')
 " or change type (e.g., cs"' changes double to single quotes)
-NeoBundle 'surround.vim'
+Plug 'surround.vim'
 
 " Highlight trailing whitespace. Use ':FixWhitespace' to remove.
-NeoBundle 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 
 " <leader>cA - add comment to end of line (<leader>ca - change type of comment)
 " <leader>cs - 'sexy comment' selection
 " <leader>cu - uncomment selection
 " <leader>c$ - comment to the end of the line
 " <leader>ci - flip comment status of each line
-NeoBundle 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 " Add useful inner/around objects (e.g., diw, 'delete inner argument' dia)
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'gaving/vim-textobj-argument'
+Plug 'kana/vim-textobj-user'
+Plug 'gaving/vim-textobj-argument'
 
 " Automatically close quotes, parens, brackets, etc. (<C-d> to get out)
-NeoBundle 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 imap <c-d> <Plug>delimitMateS-Tab
 let g:delimitMate_expand_space = 1
 let g:delimitMate_expand_cr    = 1
 let g:delimitMate_autoclose    = 1
 
 " fuzzy search
-NeoBundle 'ctrlp.vim'
+Plug 'ctrlp.vim'
 nmap <leader>be :CtrlPBuffer<cr>
 
 " Easily jump around buffer -> see below configuration for key bindings
 " <leader>j|K motions: line motions
 " <leader>l|h motions: intra-line motions
 " s - quick search in either direction (2 chars)
-NeoBundle 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 let g:EasyMotion_do_mapping  = 0 " Disable default mappings
 let g:EasyMotion_smartcase   = 1 " Turn on case sensitive feature
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
@@ -179,44 +181,36 @@ map <leader>h <Plug>(easymotion-linebackward)
 nmap s <plug>(easymotion-s2)
 
 " Edit multiple parts of a file at once (e.g., refactoring)
-NeoBundle 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 
 " <c-w>o - toggle full-screen zoom of the current window
-NeoBundle 'vim-scripts/ZoomWin'
-
-" Special handler of '.otl' files for to-do lists, outlines, etc.
-NeoBundle 'vimoutliner/vimoutliner.git'
+Plug 'vim-scripts/ZoomWin'
 
 " Allows '.' to repeat commands for a varity of plugins (e.g. surround.vim)
-NeoBundle 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " Awesome autocompletion (below makes ycm compatable w/ultisnips and supertab)
-NeoBundle 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_confirm_extra_conf           = 0
 nmap <leader>gi :YcmCompleter GoToImprecise<cr>
 
 " Autocompletion templates (compatable w/ycm and supertab)
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'darkwind-mt/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'darkwind-mt/vim-snippets'
 let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Allow multiple programs to use <tab> for autocompletion
-NeoBundle 'ervandew/supertab'
+Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" NeoBundle cleanup
-call neobundle#end()
+" Add plugins to runtimepath
+call plug#end()
 
-" NeoBundle Required:
 filetype plugin indent on " Automatic indention for files
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" General File Formatting
