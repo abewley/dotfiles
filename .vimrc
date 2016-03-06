@@ -40,6 +40,12 @@ NeoBundle 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight           = 1
 
+" Build System
+NeoBundle 'benekastah/neomake'
+" open errors/warnings after building, but don't move cursor into quickfix
+let g:neomake_open_list = 2
+nmap <leader>mv :Neomake!<cr>
+
 " C++ formatter
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'rhysd/vim-clang-format'
@@ -188,8 +194,7 @@ NeoBundle 'Valloric/YouCompleteMe'
 let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_confirm_extra_conf           = 0
-nmap <leader>gh :YcmCompleter GoToDeclaration<cr>
-nmap <leader>gi :YcmCompleter GoToDefinition<cr>
+nmap <leader>gi :YcmCompleter GoToImprecise<cr>
 
 " Autocompletion templates (compatable w/ycm and supertab)
 NeoBundle 'SirVer/ultisnips'
