@@ -61,7 +61,8 @@ map <Leader>of :FSHere<CR>
 au BufEnter *.h,*.hpp,*.hh,*.cuh let b:fswitchdst  = 'cpp,cc,cu'
 au BufEnter *.h,*.hpp,*.hh,*.cuh let b:fswitchlocs = 'reg:/include.*/src/'
 au BufEnter *.cpp,*.cc,*.cu let b:fswitchdst  = 'h,hpp,hh,cuh'
-au BufEnter *.cpp,*.cc,*.cu let b:fswitchlocs = 'reg:|src|include/**'
+" in the file's path, replace *last* occurance of 'src' with 'include'
+au BufEnter *.cpp,*.cc,*.cu let b:fswitchlocs = 'reg:|src\(.*src\)\@!|include/**'
 
 " Color parentheses differently to make matching easier
 NeoBundle 'oblitum/rainbow'
@@ -206,17 +207,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " Allow multiple programs to use <tab> for autocompletion
 NeoBundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" Allows external checkers to verify code syntax
-" OpenCL Error checking if you have:
-"   1) http://sourceforge.net/projects/clcc
-"   2) Plugin 'Syntastic'
-NeoBundle 'Syntastic'
-NeoBundle 'petRUShka/vim-opencl.git'
-let g:syntastic_cl_checkers              = ['vim-opencl']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 0
 
 " NeoBundle cleanup
 call neobundle#end()
