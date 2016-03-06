@@ -130,6 +130,7 @@ if [ "$(uname)" = "Darwin" ]; then
   export CC=/usr/bin/clang
   export CXX=/usr/bin/clang++
   export PATH="/Developer/NVIDIA/CUDA-7.5/bin:$PATH"
+  alias vim="nvim" # experimenting w/nvim as primary editor
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   # Linux
   export CC=/usr/bin/gcc
