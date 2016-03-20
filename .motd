@@ -1,33 +1,37 @@
 #!/bin/bash
 
-if [ "$(uname)" == "Darwin" ]; then
-  # Mac OS X platform
-  ADDRESS=$(ifconfig | grep 'inet '|cut -d\  -f2|grep -v 127.0.0.1|paste -d\  -s -)
-  MEMSIZE=$(calc -p $(sysctl hw.memsize|cut -d\  -f2) / 1024 / 1024 / 1024)
-  CPUINFO=$(sysctl -a|grep machdep.cpu.brand_string|cut -d: -f2|sed -e 's/^[ \t]*//')
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-  # Linux platform
-  ADDRESS=$(ifconfig|grep 'inet '|cut -d: -f2|cut -d\  -f1|grep -v 127.0.0.1|paste -d\  -s -)
-  MEMSIZE=$(echo "scale = 1;$(cat /proc/meminfo|grep MemTotal|cut -d: -f2|sed -e 's/^[ \t]*//'|cut -d\  -f1).0 / 1024.0 / 1024.0"|bc)
-  CPUINFO=$(cat /proc/cpuinfo|grep "model name"|cut -d: -f2|sed -e 's/^[ \t]*//'|head -n 1)
-#elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
-  # Windows NT platform
-fi
+# https://github.com/KittyKatt/screenFetch
+screenfetch
 
-white="\033[01;37m"
-blue="\033[01;34m"
-green="\033[0;32m"
-
-echo -e $ECHO_FLAGS "$(toilet --termwidth --metal --filter crop $(hostname -s))
-$blue++++++++++++++++++++++:$green System Data $blue:++++++++++++++++++++++++$white
-$blue+$green Hostname\t$white $(hostname)
-$blue+$green Address\t$white $ADDRESS
-$blue+$green Kernel\t$white $(uname -r)
-$blue+$green Uptime\t$white $(uptime | sed 's/.*up \([^,]*\), .*/\1/')
-$blue+$green CPU\t\t$white $CPUINFO
-$blue+$green Memory\t $white$MEMSIZE GB
-$blue+++++++++++++++++++++++:$green User Data $blue:+++++++++++++++++++++++++
-$blue+$green Username\t$white $(whoami)
-$blue+$green Shell\t\t$white $SHELL
-$blue+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++$white"
-
+# Before `screenfetch`, I did the below
+#if [ "$(uname)" == "Darwin" ]; then
+#  # Mac OS X platform
+#  ADDRESS=$(ifconfig | grep 'inet '|cut -d\  -f2|grep -v 127.0.0.1|paste -d\  -s -)
+#  MEMSIZE=$(calc -p $(sysctl hw.memsize|cut -d\  -f2) / 1024 / 1024 / 1024)
+#  CPUINFO=$(sysctl -a|grep machdep.cpu.brand_string|cut -d: -f2|sed -e 's/^[ \t]*//')
+#elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+#  # Linux platform
+#  ADDRESS=$(ifconfig|grep 'inet '|cut -d: -f2|cut -d\  -f1|grep -v 127.0.0.1|paste -d\  -s -)
+#  MEMSIZE=$(echo "scale = 1;$(cat /proc/meminfo|grep MemTotal|cut -d: -f2|sed -e 's/^[ \t]*//'|cut -d\  -f1).0 / 1024.0 / 1024.0"|bc)
+#  CPUINFO=$(cat /proc/cpuinfo|grep "model name"|cut -d: -f2|sed -e 's/^[ \t]*//'|head -n 1)
+##elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+#  # Windows NT platform
+#fi
+#
+#white="\033[01;37m"
+#blue="\033[01;34m"
+#green="\033[0;32m"
+#
+#echo -e $ECHO_FLAGS "$(toilet --termwidth --metal --filter crop $(hostname -s))
+#$blue++++++++++++++++++++++:$green System Data $blue:++++++++++++++++++++++++$white
+#$blue+$green Hostname\t$white $(hostname)
+#$blue+$green Address\t$white $ADDRESS
+#$blue+$green Kernel\t$white $(uname -r)
+#$blue+$green Uptime\t$white $(uptime | sed 's/.*up \([^,]*\), .*/\1/')
+#$blue+$green CPU\t\t$white $CPUINFO
+#$blue+$green Memory\t $white$MEMSIZE GB
+#$blue+++++++++++++++++++++++:$green User Data $blue:+++++++++++++++++++++++++
+#$blue+$green Username\t$white $(whoami)
+#$blue+$green Shell\t\t$white $SHELL
+#$blue+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++$white"
+#
