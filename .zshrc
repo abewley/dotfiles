@@ -63,8 +63,13 @@ alias tn=" tmux new -s"
 alias ta="tmux attach -t"
 alias tms="tmuxinator start"
 alias tmn="tmuxinator new"
+alias ls="ls -hp --color"
+alias ll="ls -l"
+alias lla="ll -a"
 
 alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
+
+alias clock="watch -tn 1 date +%T \| figlet -c -W -l"
 
 # Remove swap files below this directory (confirms before deleting each file)
 rmswp() {
@@ -142,10 +147,16 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   export CXX=/usr/bin/g++
   export CUDA_VISIBLE_DEVICES=0
   eval `keychain --agents ssh --eval id_rsa`
+  export PATH="/usr/local/cuda/bin:$PATH"
+
+  if [ -e $HOME/opt/cmake ]
+  then
+    export CMAKE_ROOT=$HOME/opt/cmake
+  fi
 elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
   # Windows
 fi
 
-" You must run the following command to install iTerm shell integration:
-"   curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
+# You must run the following command to install iTerm shell integration:
+#   curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
 source ~/.iterm2_shell_integration.`basename $SHELL`
