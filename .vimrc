@@ -34,6 +34,15 @@ let g:solarized_termcolors = 256
 let g:solarized_contrast   = "high"
 let g:solarized_visibility = "high"
 
+" Indent highlight
+Plug 'Yggdroot/indentLine'
+
+" Fuzzy find
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Matlab support
+Plug 'vim-scripts/MatlabFilesEdition'
+
 " Python support
 Plug 'klen/python-mode'
 
@@ -41,6 +50,15 @@ Plug 'klen/python-mode'
 Plug 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight           = 1
+
+" Syntax highlighting for Gradle build files
+Plug 'tfnico/vim-gradle'
+
+" JavaFx Support
+Plug 'vim-scripts/fx.vim'
+
+" Qt Quick Support
+Plug 'peterhoeg/vim-qml'
 
 " Build System
 Plug 'benekastah/neomake'
@@ -122,7 +140,7 @@ nmap <Leader>t :TagbarToggle<CR>
 Plug 'fugitive.vim'
 
 " Displays +, -, or ~ in the margin of files f/changes since last git commit
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 " Better search utility
 Plug 'haya14busa/incsearch.vim'
 set hlsearch
@@ -154,13 +172,16 @@ Plug 'scrooloose/nerdcommenter'
 " Add useful inner/around objects (e.g., diw, 'delete inner argument' dia)
 Plug 'kana/vim-textobj-user'
 Plug 'gaving/vim-textobj-argument'
-
+"
 " Automatically close quotes, parens, brackets, etc. (<C-d> to get out)
 Plug 'Raimondi/delimitMate'
 imap <c-d> <Plug>delimitMateS-Tab
 let g:delimitMate_expand_space = 1
 let g:delimitMate_expand_cr    = 1
 let g:delimitMate_autoclose    = 1
+
+" helps find the source code root directory
+Plug 'airblade/vim-rooter'
 
 " fuzzy search
 Plug 'ctrlp.vim'
@@ -195,6 +216,10 @@ let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_confirm_extra_conf           = 0
 nmap <leader>gi :YcmCompleter GoToImprecise<cr>
+
+" Eclim is like YCM but for Java
+let g:EclimCompletionMethod = 'omnifunc'
+let g:EclimJavaCompleteCaseSensitive = 0
 
 " Autocompletion templates (compatable w/ycm and supertab)
 Plug 'SirVer/ultisnips'

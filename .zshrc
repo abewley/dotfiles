@@ -130,7 +130,12 @@ if [ "$(uname)" = "Darwin" ]; then
   export CC=/usr/bin/clang
   export CXX=/usr/bin/clang++
   export PATH="/Developer/NVIDIA/CUDA-7.5/bin:$PATH"
+  export PATH="$HOME/Library/Haskell/bin:$PATH"
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home
   alias vim="nvim" # experimenting w/nvim as primary editor
+  QTDIR=/usr/local/Cellar/qt5
+  QTPKG=Qt5Widgets
+  mkdir -p ~/.cmake/packages/$QTPKG && echo $QTDIR/$(ls $QTDIR | sort -n -r | head -n 1)/lib/cmake/$QTPKG > ~/.cmake/packages/$QTPKG/ref
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   # Linux
   export CC=/usr/bin/gcc
@@ -140,3 +145,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
 elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
   # Windows
 fi
+
+" You must run the following command to install iTerm shell integration:
+"   curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
+source ~/.iterm2_shell_integration.`basename $SHELL`
