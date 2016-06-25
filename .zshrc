@@ -63,9 +63,6 @@ alias tn=" tmux new -s"
 alias ta="tmux attach -t"
 alias tms="tmuxinator start"
 alias tmn="tmuxinator new"
-alias ls="ls -hp --color"
-alias ll="ls -l"
-alias lla="ll -a"
 
 alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 
